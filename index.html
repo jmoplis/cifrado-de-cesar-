@@ -12,6 +12,16 @@
     <main>
         <h1>Cifrador Cesar.</h1>
         <form id="cifrador" autocomplete="off">
+            <div class="modo">
+                <label>
+                    <input type="radio" name="modo" value="cifrar" checked>
+                    <span>Cifrar</span>
+                </label>
+                <label>
+                    <input type="radio" name="modo" value="descifrar">
+                    <span>Descifrar</span>
+                </label>
+            </div>
             <input id="input-original" spellcheck="false" placeholder="Ingrese el texto" type="text" name="text">
         </form>
         <div id="resultado"></div>
