@@ -3,6 +3,13 @@ const inputOriginal = document.getElementById('input-original');
 const cifrador = document.getElementById('cifrador');
 const resultado = document.getElementById('resultado');
 const rango = document.getElementById('rango');
+const modos = document.querySelectorAll('input[name="modo"]');
+
+const getShift = () => {
+    const modoSeleccionado = [...modos].find(modo => modo.checked)?.value;
+    const desplazamiento = parseInt(rango.value, 10);
+    return modoSeleccionado === 'descifrar' ? -desplazamiento : desplazamiento;
+};
 
 const shifMessage = () => {
     const wordArray = [...inputOriginal.value.toUpperCase()];
@@ -17,8 +24,10 @@ const printChar = (currentLetterIndex, wordArray) => {
     animateChar(spanChar)
         .then( () => {
             const charSinCodificar = wordArray[currentLetterIndex];
+            const shift = getShift();
+            const indiceOriginal = alfabeto.indexOf(charSinCodificar);
             spanChar.innerHTML = alfabeto.includes(charSinCodificar) ? 
-                alfabeto[(alfabeto.indexOf(charSinCodificar) + parseInt(rango.value)) % alfabeto.length] : 
+                alfabeto[(indiceOriginal + shift + alfabeto.length) % alfabeto.length] : 
                 charSinCodificar
             printChar(currentLetterIndex + 1, wordArray);
         });
